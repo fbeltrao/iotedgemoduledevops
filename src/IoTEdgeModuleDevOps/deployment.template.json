@@ -52,7 +52,7 @@
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.IoTEdgeTemperatureAlert.amd64}",
+              "image": "${MODULES.IoTEdgeTemperatureAlert.arm32v7}",
               "createOptions": "{}"
             }
           }

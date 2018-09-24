@@ -1,5 +1,5 @@
 FROM microsoft/dotnet:2.1-sdk AS build-env
-COPY ./qemu-arm-static /usr/bin/qemu-arm-static
+COPY qemu-arm-static /usr/bin/qemu-arm-static
 WORKDIR /app
 
 COPY *.csproj ./

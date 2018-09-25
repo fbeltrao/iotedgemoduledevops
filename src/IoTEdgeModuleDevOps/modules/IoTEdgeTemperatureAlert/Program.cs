@@ -62,7 +62,7 @@ namespace IoTEdgeTemperatureAlert
         /// </summary>
         static async Task<MessageResponse> FilterMessage(Message message, object userContext)
         {
-             var moduleClient = userContext as ModuleClient;
+            var moduleClient = userContext as ModuleClient;
             if (moduleClient == null)
             {
                 throw new InvalidOperationException("UserContext doesn't contain " + "expected values");

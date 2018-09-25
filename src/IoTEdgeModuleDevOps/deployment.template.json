@@ -58,8 +58,8 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "allDevicesToTemperatureAlertModule": "FROM /messages/* INTO BrokeredEndpoint(\"/modules/IoTEdgeTemperatureAlert/inputs/input1\")",
-          "IoTEdgeTemperatureAlertToIoTHub": "FROM /messages/modules/IoTEdgeTemperatureAlert/outputs/* INTO $upstream"          
+          "IoTEdgeTemperatureAlertToIoTHub": "FROM /messages/modules/IoTEdgeTemperatureAlert/outputs/* INTO $upstream",
+          "allDevicesToTemperatureAlertModule": "FROM * INTO BrokeredEndpoint(\"/modules/IoTEdgeTemperatureAlert/inputs/input1\")"          
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200

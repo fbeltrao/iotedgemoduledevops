@@ -70,7 +70,14 @@ namespace IoTEdgeTemperatureAlert
 
             byte[] messageBytes = message.GetBytes();
             string messageString = Encoding.UTF8.GetString(messageBytes);
-            Console.WriteLine($"Received message: Body: [{messageString}]");
+            var propertiesString = new StringBuilder();
+            foreach (var kv in message.Properties)
+            {
+                if (propertiesString.Length > 0)
+                    propertiesString.Append(", ");
+                propertiesString.Append(kv.Key).Append('=').Append(kv.Value);
+            }
+            Console.WriteLine($"Received message: Properties: [{propertiesString.ToString()}, Body: [{messageString}]");
 
             var filteredMessage = Filter(message);
 
@@ -105,6 +112,7 @@ namespace IoTEdgeTemperatureAlert
                 }
 
                 filteredMessage.Properties.Add("MessageType", "Alert");
+                filteredMessage.Properties.Add("sender", "IoTEdgeTemperatureAlert");
                 return filteredMessage;
             }
             return null;

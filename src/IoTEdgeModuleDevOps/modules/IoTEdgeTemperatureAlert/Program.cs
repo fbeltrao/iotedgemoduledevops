@@ -77,7 +77,9 @@ namespace IoTEdgeTemperatureAlert
                     propertiesString.Append(", ");
                 propertiesString.Append(kv.Key).Append('=').Append(kv.Value);
             }
-            Console.WriteLine($"Received message: Properties: [{propertiesString.ToString()}, Body: [{messageString}]");
+
+            
+            Console.WriteLine($"[{message.CreationTimeUtc.ToString()}] Received message: Connected Device: {message.ConnectionDeviceId}, Module: {message.ConnectionModuleId}, Properties: [{propertiesString.ToString()}], Body: [{messageString}]");
 
             var filteredMessage = Filter(message);
 

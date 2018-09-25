@@ -35,17 +35,7 @@
             }
           }
         },
-        "modules": {
-          "tempSensor": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
-              "createOptions": "{}"
-            }
-          },
+        "modules": {          
           "IoTEdgeTemperatureAlert": {
             "version": "1.0",
             "type": "docker",
@@ -63,12 +53,12 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "IoTEdgeTemperatureAlertToIoTHub": "FROM /messages/modules/IoTEdgeTemperatureAlert/outputs/* INTO $upstream",
-          "sensorToIoTEdgeTemperatureAlert": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/IoTEdgeTemperatureAlert/inputs/input1\")"
+          "allDevicesToTemperatureAlertModule": "FROM /messages/* INTO BrokeredEndpoint(\"/modules/IoTEdgeTemperatureAlert/inputs/input1\")",
+          "IoTEdgeTemperatureAlertToIoTHub": "FROM /messages/modules/IoTEdgeTemperatureAlert/outputs/* INTO $upstream"          
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
-        }
+        }        
       }
     }
   }

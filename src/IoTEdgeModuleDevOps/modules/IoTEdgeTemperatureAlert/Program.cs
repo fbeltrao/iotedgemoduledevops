@@ -16,7 +16,9 @@ namespace IoTEdgeTemperatureAlert
     {
         static int temperatureThreshold { get; set; } = 25;
 
-        static bool IsMessageForwardEnabled() => Environment.GetEnvironmentVariable("FORWARD_MESSAGE") != "0" && (string.Compare("false", Environment.GetEnvironmentVariable("FORWARD_MESSAGE"), true) != 0);
+        static bool IsMessageForwardEnabled() => 
+            File.Exists("./FORWARD_MESSAGE.txt") ||
+            (Environment.GetEnvironmentVariable("FORWARD_MESSAGE") != "0" && (string.Compare("false", Environment.GetEnvironmentVariable("FORWARD_MESSAGE"), true) != 0));
 
         static void Main(string[] args)
         {

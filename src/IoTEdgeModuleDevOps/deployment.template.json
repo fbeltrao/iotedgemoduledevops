@@ -52,6 +52,11 @@
             "settings": {
               "image": "${MODULES.IoTEdgeTemperatureAlert.arm32v7}",
               "createOptions": "{}"
+            },
+            "env": {
+              "FORWARD_MESSAGE": {
+                "value": "false"
+              }
             }
           }
         }

@@ -15,6 +15,7 @@ namespace IoTEdgeTemperatureAlert
     public class Program
     {
         static int temperatureThreshold { get; set; } = 25;
+        static bool forwardMessage = true;
 
         static void Main(string[] args)
         {
@@ -48,8 +49,11 @@ namespace IoTEdgeTemperatureAlert
 
             // Open a connection to the Edge runtime
             ModuleClient ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(settings);
-            await ioTHubModuleClient.OpenAsync();
+            await ioTHubModuleClient.OpenAsync();            
             Console.WriteLine("IoT Hub module client initialized.");
+
+            forwardMessage = Environment.GetEnvironmentVariable("FORWARD_MESSAGE") != "0" && (string.Compare("false", Environment.GetEnvironmentVariable("FORWARD_MESSAGE"), true) != 0);
+            Console.WriteLine($"{nameof(forwardMessage)} = {forwardMessage}");
 
             // Register callback to be called when a message is received by the module
             await ioTHubModuleClient.SetInputMessageHandlerAsync("input1", FilterMessage, ioTHubModuleClient);
@@ -90,8 +94,16 @@ namespace IoTEdgeTemperatureAlert
                 {
                     pipeMessage.Properties.Add(prop.Key, prop.Value);
                 }
-                await moduleClient.SendEventAsync("output1", pipeMessage);
-                Console.WriteLine("Received message sent");
+
+                if (forwardMessage)
+                {
+                    await moduleClient.SendEventAsync("output1", pipeMessage);
+                    Console.WriteLine("Received message sent");
+                }
+                else
+                {
+                    Console.WriteLine("Received message not sent because message forwarding is disabled");
+                }
             }
             return MessageResponse.Completed;
         }

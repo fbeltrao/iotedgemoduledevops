@@ -58,6 +58,55 @@ sudo cp /home/pi/iotedgecerts/certs/azure-iot-test-only.root.ca.cert.pem  /usr/l
 sudo update-ca-certificates
 ```
 
+Communicating as a device
+```javascript
+const fs = require('fs');
+
+var connectionString = 'HostName=xxxxx.azure-devices.net;DeviceId=mydevice;SharedAccessKey=xxx;GatewayHostName=pi';
+
+// use factory function from AMQP-specific package
+//var clientFromConnectionString = require('azure-iot-device-amqp').clientFromConnectionString;
+var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
+
+// AMQP-specific factory function returns Client object from core package
+var client = clientFromConnectionString(connectionString);
+
+
+const fileName = "/home/pi/iotedgecerts/certs/azure-iot-test-only.root.ca.cert.pem";
+//const fileName = "/home/pi/iotedgecert/certs/new-edge-device.cert.pem";
+
+const options = {
+        ca: fs.readFileSync(fileName, "utf-8").toString()
+};
+
+client.setOptions(options, () => { console.log("Client transport option set"); });
+
+
+// use Message object from core package
+var Message = require('azure-iot-device').Message;
+
+var connectCallback = function (err) {
+  if (err) {
+    console.error('Could not connect: ' + err);
+  } else {
+    console.log('Client connected');
+    var msg = new Message(JSON.stringify( {  machine: { temperature: 30, pressure: 0 }, ambient: { temperature: 21, humidity: 0 } }));
+    client.sendEvent(msg, function (err) {
+      if (err) {
+        console.log(err.toString());
+        process.exit(1);
+      } else {
+        console.log('Message sent');
+        process.exit(0);
+      };
+    });
+  };
+};
+
+
+client.open(connectCallback);
+```
+
 ## IoT Edge Module
 
 The IoT edge module we will be testing is filtering temperature measurements, sending telemetry only if the temperature reaches a threshold.

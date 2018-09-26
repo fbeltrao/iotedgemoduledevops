@@ -112,7 +112,15 @@ namespace IoTEdgeTemperatureAlert
             var messageString = Encoding.UTF8.GetString(messageBytes);
 
             // Get message body
-            var messageBody = JsonConvert.DeserializeObject<MessageBody>(messageString);
+            MessageBody messageBody = null;
+            try
+            {
+                messageBody = JsonConvert.DeserializeObject<MessageBody>(messageString);
+            }
+            catch (JsonSerializationException ex)
+            {
+                Console.WriteLine("Error parsing message: " + ex.ToString());
+            }
 
             if (messageBody != null && messageBody.machine.temperature > temperatureThreshold)
             {

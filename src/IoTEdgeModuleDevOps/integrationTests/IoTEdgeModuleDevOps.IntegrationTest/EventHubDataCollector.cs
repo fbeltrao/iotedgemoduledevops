@@ -6,6 +6,7 @@ using Microsoft.Azure.EventHubs;
 
 namespace IoTEdgeModuleDevOps.IntegrationTest
 {
+
     public class EventHubDataCollector : IPartitionReceiveHandler, IDisposable
     {
         private EventHubClient eventHubClient;
@@ -32,7 +33,7 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
             var rti = await this.eventHubClient.GetRuntimeInformationAsync();
             foreach (var partitionId in rti.PartitionIds)
             {
-                var receiver = this.eventHubClient.CreateReceiver(this.ConsumerGroupName, partitionId, EventPosition.FromEnqueuedTime(DateTime.UtcNow));
+                var receiver = this.eventHubClient.CreateReceiver(this.ConsumerGroupName, partitionId, EventPosition.FromEnqueuedTime(DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(1))));
                 receiver.SetReceiveHandler(this);
                 this.receivers.Add(receiver);
             }

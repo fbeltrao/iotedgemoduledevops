@@ -55,7 +55,7 @@
             },
             "env": {
               "FORWARD_MESSAGE": {
-                "value": "false"
+                "value": "true"
               }
             }
           }

@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTEdgeTemperatureAlert", "src\IoTEdgeModuleDevOps\modules\IoTEdgeTemperatureAlert\IoTEdgeTemperatureAlert.csproj", "{5EBE592D-7444-445F-B03E-4BFC6562A94A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{79CBE53E-A2AE-4156-BE89-AFC5F44E8A94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTEdgeModuleDevOps.IntegrationTest", "src\IoTEdgeModuleDevOps\integrationTests\IoTEdgeModuleDevOps.IntegrationTest\IoTEdgeModuleDevOps.IntegrationTest.csproj", "{957C25CF-8617-41CC-9A1A-2B94F5285F66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EBE592D-7444-445F-B03E-4BFC6562A94A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EBE592D-7444-445F-B03E-4BFC6562A94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EBE592D-7444-445F-B03E-4BFC6562A94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EBE592D-7444-445F-B03E-4BFC6562A94A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{957C25CF-8617-41CC-9A1A-2B94F5285F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957C25CF-8617-41CC-9A1A-2B94F5285F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957C25CF-8617-41CC-9A1A-2B94F5285F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{957C25CF-8617-41CC-9A1A-2B94F5285F66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{957C25CF-8617-41CC-9A1A-2B94F5285F66} = {79CBE53E-A2AE-4156-BE89-AFC5F44E8A94}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21A26479-6C0D-40A7-BCA3-7E89081B9944}
+	EndGlobalSection
+EndGlobal

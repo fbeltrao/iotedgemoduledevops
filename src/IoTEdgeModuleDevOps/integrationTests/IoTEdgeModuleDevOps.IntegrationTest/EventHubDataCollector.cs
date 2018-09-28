@@ -18,11 +18,17 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
         public string ConsumerGroupName { get; set; } = "$Default";
         
 
-        public EventHubDataCollector(string connectionString)
+        public EventHubDataCollector(string connectionString) : this(connectionString, null)
+        {            
+        }
+
+        public EventHubDataCollector(string connectionString, string consumerGroupName)
         {
             this.eventHubClient = EventHubClient.CreateFromConnectionString(connectionString);
             this.events = new ConcurrentQueue<EventData>();
             this.receivers = new List<PartitionReceiver>();
+            if (!string.IsNullOrEmpty(consumerGroupName))
+                this.ConsumerGroupName = consumerGroupName;
         }
 
         public async Task Start()

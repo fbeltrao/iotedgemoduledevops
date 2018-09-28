@@ -59,7 +59,7 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
 
         public async Task<bool> EnsureHasEvent(Func<EventData, string, string, bool> predicate)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < this.testConfiguration.EnsureHasEventMaximumTries; i++)
             {
                 foreach (var item in this.Events.GetEvents())
                 {
@@ -72,7 +72,7 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
 
                 }
 
-                await Task.Delay(1000);
+                await Task.Delay(TimeSpan.FromSeconds(this.testConfiguration.EnsureHasEventDelayBetweenReadsInSeconds));
             }
 
             return false;

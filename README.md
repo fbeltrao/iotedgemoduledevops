@@ -8,6 +8,34 @@ The idea is to once code is commited a new build starts, runs unit tests and dep
 [TODO]
 Reference: https://damianbrady.com.au/2018/08/17/running-a-build-release-deployment-agent-on-a-raspberry-pi/
 
+```bash
+
+curl -L https://damovisa.blob.core.windows.net/damovisa-public/vsts-agent-rpi-2.136.2.tar.gz -o vsts-agent-rpi-2.136.2.tar.gz
+
+mkdir vsts-agent
+tar -xf vsts-agent-rpi-2.136.2.tar.gz -C ./vsts-agent
+
+# install node
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# install .net core
+sudo apt-get -y install libunwind8 gettext
+
+wget https://download.microsoft.com/download/8/A/7/8A765126-50CA-4C6F-890B-19AE47961E4B/dotnet-sdk-2.1.402-linux-arm.tar.gz
+wget https://dotnetcli.blob.core.windows.net/dotnet/aspnetcore/Runtime/2.1.0/aspnetcore-runtime-2.1.0-linux-arm.tar.gz
+
+sudo mkdir /opt/dotnet
+sudo tar -xvf dotnet-sdk-2.1.402-linux-arm.tar.gz -C /opt/dotnet/
+sudo tar -xvf aspnetcore-runtime-2.1.0-linux-arm.tar.gz -C /opt/dotnet/
+sudo ln -s /opt/dotnet/dotnet /usr/local/bin
+
+
+./config.sh
+SERVER URL: https://xxx.visualstudio.com
+
+```
+
 ## Installing Client Certificate
 
 All details are here: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-create-transparent-gateway-linux

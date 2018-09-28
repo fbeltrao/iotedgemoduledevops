@@ -43,8 +43,10 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
         public string IoTHubEventHubConnectionString { get; set; }
         public string IoTHubConnectionString { get; set; }  
         public string DeviceClientConnectionString { get; set; }
-
         public string CertificatePath { get; set; } = "/home/pi/iotedgecerts/certs/azure-iot-test-only.root.ca.cert.pem";
+
+        public int EnsureHasEventDelayBetweenReadsInSeconds { get; set; } = 2;
+        public int EnsureHasEventMaximumTries { get; set; } = 5;
 
     }
 

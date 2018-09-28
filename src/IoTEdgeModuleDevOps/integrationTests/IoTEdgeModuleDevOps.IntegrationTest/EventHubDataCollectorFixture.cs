@@ -22,7 +22,7 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
         {
             this.testConfiguration = TestConfiguration.GetConfiguration();
 
-            this.Events = new EventHubDataCollector(testConfiguration.IoTHubEventHubConnectionString);
+            this.Events = new EventHubDataCollector(testConfiguration.IoTHubEventHubConnectionString, testConfiguration.IoTHubEventHubConsumerGroup);
             var startTask = this.Events.Start();
 
 

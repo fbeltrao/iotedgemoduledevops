@@ -38,7 +38,7 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
         }
 
         [Fact]
-        public async Task High_Temperature_Goes_Not_Go_Upstream()
+        public async Task High_Temperature_Goes_To_Upstream()
         {
             var payloadData = new { machine = new { temperature = 30, pressure = 0 }, ambient = new { temperature = 21, humidity = 0 } };
             var payloadText = JsonConvert.SerializeObject(payloadData);

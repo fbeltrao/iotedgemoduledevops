@@ -47,7 +47,7 @@ namespace IoTEdgeModuleDevOps.IntegrationTest
 
         public int EnsureHasEventDelayBetweenReadsInSeconds { get; set; } = 2;
         public int EnsureHasEventMaximumTries { get; set; } = 5;
-
+        public string IoTHubEventHubConsumerGroup { get; set; } = "$Default";
     }
 
 }

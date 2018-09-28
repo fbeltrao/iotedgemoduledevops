@@ -36,9 +36,6 @@
             "env": {
               "OptimizeForPerformance": {
                   "value": "false"
-              },
-              "UpstreamProtocol": {
-                "value": "MQTT"
               }
             }
           }

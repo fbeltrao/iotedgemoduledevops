@@ -87,6 +87,7 @@ sudo update-ca-certificates
 ```
 
 Communicating as a device
+
 ```javascript
 const fs = require('fs');
 
@@ -110,6 +111,13 @@ const options = {
 client.setOptions(options, () => { console.log("Client transport option set"); });
 
 
+var machineTemperature = 20;
+if (process.argv.length >= 2) {
+  console.log('Using temperature found in args: ' + process.argv[2]);
+  machineTemperature = parseFloat(process.argv[2]);
+}
+
+
 // use Message object from core package
 var Message = require('azure-iot-device').Message;
 
@@ -118,13 +126,13 @@ var connectCallback = function (err) {
     console.error('Could not connect: ' + err);
   } else {
     console.log('Client connected');
-    var msg = new Message(JSON.stringify( {  machine: { temperature: 30, pressure: 0 }, ambient: { temperature: 21, humidity: 0 } }));
+    var msg = new Message(JSON.stringify( {  machine: { temperature: machineTemperature, pressure: 0 }, ambient: { temperature: 21, humidity: 0 } }));
     client.sendEvent(msg, function (err) {
       if (err) {
         console.log(err.toString());
         process.exit(1);
       } else {
-        console.log('Message sent');
+        console.log('Message sent: ' + payload);
         process.exit(0);
       };
     });
